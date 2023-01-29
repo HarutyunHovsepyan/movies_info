@@ -1,14 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import loadDetail from "../actions/detailsMovie";
 
-const Movie = ({ name, released, image }) => {
+const Movie = ({ name, released, image, id }) => {
     let posterUrl = `https://image.tmdb.org/t/p/w500${image}`;
+
+    const dispatch = useDispatch()
+
+    const loadDetailHandler = () => {
+        dispatch(loadDetail(id))
+    }
     return (
-        <StyledMovies>
+        <StyledMovies onClick={loadDetailHandler}>
             <h3>{name}</h3>
             <p>{released}</p>
-            <img src={posterUrl} alt="please send " />
+            <img src={posterUrl} alt="no backgDrop_img" />
         </StyledMovies>
     )
 }

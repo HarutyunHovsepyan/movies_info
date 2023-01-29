@@ -1,7 +1,10 @@
-const base_url = 'https://api.themoviedb.org/3/'
-const API_KEY = `api_key=${process.env.REACT_APP_URL_KEY}`
+const base_url = 'https://api.themoviedb.org/3/movie/'
+const API_KEY = `?api_key=${process.env.REACT_APP_URL_KEY}`
+const laguagesMovie = `&language=ru-RU&page=1`
 
-export const popularMoviesUrl = () => `${base_url}trending/all/day?${API_KEY}&language=en-US&page=1`
-export const upcomingMoviesUrl = () => `${base_url}movie/upcoming?${API_KEY}&language=en-US&page=1`
-export const newMoviesUrl = () => `${base_url}movie/now_playing?${API_KEY}&language=en-US&page=1`
+export const popularMoviesUrl = () => `${base_url}popular${API_KEY}${laguagesMovie}`
+export const allTimeRatedMoviesUrl = () => `${base_url}top_rated${API_KEY}${laguagesMovie}`
+export const newMoviesUrl = () => `${base_url}now_playing${API_KEY}${laguagesMovie}`
 
+export const MovieDetailsUrl = (movie_id) => `${base_url}${movie_id}${API_KEY}${laguagesMovie}`
+export const MovieScreenshotUrl = (movie_id) => `${base_url}${movie_id}${API_KEY}${laguagesMovie}/screenshot`

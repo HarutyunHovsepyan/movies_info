@@ -1,17 +1,17 @@
 import axios from "axios";
-import { popularMoviesUrl,newMoviesUrl,upcomingMoviesUrl } from "../api";
+import { popularMoviesUrl,newMoviesUrl,allTimeRatedMoviesUrl } from "../api";
 
 
 export const loadMovies = () => async (dispatch) =>{
     const popularData = await axios.get(popularMoviesUrl())
-    const upcomingMoviesData = await axios.get(upcomingMoviesUrl())
+    const allTimeRatedMoviesData = await axios.get(allTimeRatedMoviesUrl())
     const newMoviesData= await axios.get(newMoviesUrl())
     dispatch({
         type:'FETCH_MOVIES',
         payload:{
             popular: popularData.data.results,
             newMovies: newMoviesData.data.results,
-            upcoming: upcomingMoviesData.data.results,
+            allTimesRated: allTimeRatedMoviesData.data.results,
         }
     })
 }
