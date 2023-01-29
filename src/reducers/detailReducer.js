@@ -1,5 +1,5 @@
 const initialState = {
-    game: {},
+    movie: {},
     screen: {}
 }
 

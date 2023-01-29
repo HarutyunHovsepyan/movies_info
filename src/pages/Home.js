@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { loadMovies } from "../actions/movieAction";
 import Movie from "../components/Movie";
+import MovieDetail from "../components/MovieDetail";
 
 const Home = () => {
     const dispatch = useDispatch()
@@ -18,6 +19,7 @@ const Home = () => {
     let newMoviesMovie = newMovies.slice(0, 10)
     return (
         <MovieList>
+            <MovieDetail />
             <h2>New movies</h2>
             <Movies>
                 {newMoviesMovie.map(movie => (
