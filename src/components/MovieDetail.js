@@ -2,29 +2,40 @@ import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const MovieDetail = () =>{
-    const movie =useSelector((state) => state.detail.movie)
+const MovieDetail = () => {
+    const {movie,isLoading} = useSelector((state) => state.detail)
     let backdrop_img = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`;
-    return(
-        <CardShadow>
-            <Detail>
-                <div className="stats">
-                    <div className="rating">
-                        <h3>{movie.original_title}</h3>
-                        <p>{movie.vote_average}</p>
-                    </div>
-                    <div className="info">
-                    </div>
-                </div>
-                <div className="media">
-                  <img src={backdrop_img} alt="" />
-                </div>
-                <div className="description">
-                    <p>{movie.overview}</p>
-                </div>
-            </Detail>
-        </CardShadow>
+
+    const navigate = useNavigate()
+    const exitDetailHandler =(e) =>{
+        const element = e.target;
+        if(element.classList.contains('shadow')){
+            document.body.style.overflow ='auto';
+            navigate('/')
+        }
+    }
+    return (
+        <>
+          {!isLoading &&(
+             <CardShadow className="shadow" onClick={exitDetailHandler}>
+                <Detail>
+                    <Stats>
+                        <div className="rating">
+                            <h3>{movie.original_title}</h3>
+                            <p>{movie.vote_average}</p>
+                        </div>
+                    </Stats>
+                    <Media>
+                        <img src={backdrop_img} alt="" />
+                    </Media>
+                    <Description>
+                        <p>{movie.overview}</p>
+                    </Description>
+                </Detail>
+            </CardShadow>)}
+        </>
     )
 }
 
@@ -37,12 +48,22 @@ const CardShadow = styled(motion.div)`
     position: fixed;
     top:0;
     left:0;
+
+    &::-webkit-scrollbar{
+        width: 0.5rem;
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: pink;
+    }
+    &::-webkit-scrollbar-track{
+        background-color: white;
+    }
 `
 
 const Detail = styled(motion.div)`
     width: 80%;
     border-radius: 1rem;
-    padding: 2rem 20rem;
+    padding: 2rem 5rem;
     background: white;
     position: absolute;
     left: 10%;
@@ -50,7 +71,25 @@ const Detail = styled(motion.div)`
     img{
         width: 100%;
     }
+`
 
+const Stats = styled(motion.div)`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+
+const Media = styled(motion.div)`
+    margin-top: 5rem;
+    img{
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+`
+
+const Description = styled(motion.div)`
+    margin: 5rem 0rem;
 `
 
 export default MovieDetail

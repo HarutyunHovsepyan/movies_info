@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { loadMovies } from "../actions/movieAction";
 import Movie from "../components/Movie";
@@ -8,7 +9,8 @@ import MovieDetail from "../components/MovieDetail";
 
 const Home = () => {
     const dispatch = useDispatch()
-
+    const location = useLocation()
+    const pathId = location.pathname.split('/')[2]
     useEffect(() => {
         dispatch(loadMovies())
     }, [dispatch])
@@ -19,7 +21,7 @@ const Home = () => {
     let newMoviesMovie = newMovies.slice(0, 10)
     return (
         <MovieList>
-            <MovieDetail />
+            {pathId &&  <MovieDetail />}
             <h2>New movies</h2>
             <Movies>
                 {newMoviesMovie.map(movie => (
