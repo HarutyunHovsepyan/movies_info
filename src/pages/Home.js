@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -21,43 +21,48 @@ const Home = () => {
     let newMoviesMovie = newMovies.slice(0, 10)
     return (
         <MovieList>
-            {pathId &&  <MovieDetail />}
-            <h2>New movies</h2>
-            <Movies>
-                {newMoviesMovie.map(movie => (
-                    <Movie
-                        name={movie.original_title}
-                        released={movie.release_date}
-                        id={movie.id}
-                        image={movie.poster_path}
-                        key={movie.id}
-                    />
-                ))}
-            </Movies>
-            <h2>The most popular movies of the past 2 years</h2>
-            <Movies>
-                {popularMovie.map(movie => (
-                    <Movie
-                        name={movie.original_title}
-                        released={movie.release_date}
-                        id={movie.id}
-                        image={movie.poster_path}
-                        key={movie.id}
-                    />
-                ))}
-            </Movies>
-            <h2>The most popular movies of all time</h2>
-            <Movies>
-                {allTimesRate.map(movie => (
-                    <Movie
-                        name={movie.original_title}
-                        released={movie.release_date}
-                        id={movie.id}
-                        image={movie.poster_path}
-                        key={movie.id}
-                    />
-                ))}
-            </Movies>
+            <AnimateSharedLayout type='crossfade'>
+                <AnimatePresence>
+                    {pathId && <MovieDetail pathId={pathId}/>}
+                </AnimatePresence>
+                <h2>New movies</h2>
+                <Movies>
+                    {newMoviesMovie.map(movie => (
+                        <Movie
+                            name={movie.original_title}
+                            released={movie.release_date}
+                            id={movie.id}
+                            image={movie.poster_path}
+                            key={movie.id}
+                        />
+                    ))}
+                </Movies>
+                <h2>The most popular movies of the past 2 years</h2>
+                <Movies>
+                    {popularMovie.map(movie => (
+                        <Movie
+                            name={movie.original_title}
+                            released={movie.release_date}
+                            id={movie.id}
+                            image={movie.poster_path}
+                            key={movie.id}
+                        />
+                    ))}
+                </Movies>
+                <h2>The most popular movies of all time</h2>
+                <Movies>
+                    {allTimesRate.map(movie => (
+                        <Movie
+                            name={movie.original_title}
+                            released={movie.release_date}
+                            id={movie.id}
+                            image={movie.poster_path}
+                            key={movie.id}
+                        />
+                    ))}
+
+                </Movies>
+            </AnimateSharedLayout>
         </MovieList>
     )
 }

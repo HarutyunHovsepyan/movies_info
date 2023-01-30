@@ -2,12 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
-const MovieDetail = () => {
+const MovieDetail = ({pathId}) => {
     const {movie,isLoading} = useSelector((state) => state.detail)
-    let backdrop_img = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`;
-
+    let poster_path = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
     const navigate = useNavigate()
     const exitDetailHandler =(e) =>{
         const element = e.target;
@@ -20,15 +19,15 @@ const MovieDetail = () => {
         <>
           {!isLoading &&(
              <CardShadow className="shadow" onClick={exitDetailHandler}>
-                <Detail>
+                <Detail layoutId={pathId}>
                     <Stats>
                         <div className="rating">
                             <h3>{movie.original_title}</h3>
-                            <p>{movie.vote_average}</p>
+                            <p>Raiting : {movie.vote_average}</p>
                         </div>
                     </Stats>
                     <Media>
-                        <img src={backdrop_img} alt="" />
+                        <img src={poster_path} alt="" />
                     </Media>
                     <Description>
                         <p>{movie.overview}</p>
