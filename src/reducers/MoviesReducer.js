@@ -1,7 +1,7 @@
 const initState = {
     popular: [],
     newMovies: [],
-    allTimesRated: []
+    allTimesRated: [],
 }
 
 const movieReducer = (state = initState, action) => {

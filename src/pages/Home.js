@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { loadMovies } from "../actions/movieAction";
 import Movie from "../components/Movie";
 import MovieDetail from "../components/MovieDetail";
+import { fadeIn } from "../style/Animation";
 
 const Home = () => {
     const dispatch = useDispatch()
@@ -20,7 +21,7 @@ const Home = () => {
     let popularMovie = popular.slice(5, 15)
     let newMoviesMovie = newMovies.slice(0, 10)
     return (
-        <MovieList>
+        <MovieList variants={fadeIn} initial='hidden' animate='show'>
             <AnimateSharedLayout type='crossfade'>
                 <AnimatePresence>
                     {pathId && <MovieDetail pathId={pathId}/>}

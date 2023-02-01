@@ -1,5 +1,5 @@
 import axios from "axios";
-import { popularMoviesUrl,newMoviesUrl,allTimeRatedMoviesUrl } from "../api";
+import { popularMoviesUrl,newMoviesUrl,allTimeRatedMoviesUrl, searchMovieUrl } from "../api";
 
 
 export const loadMovies = () => async (dispatch) =>{

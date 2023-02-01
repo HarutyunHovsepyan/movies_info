@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import loadDetail from "../actions/detailsMovie";
 import { Link } from "react-router-dom";
+import { popup } from "../style/Animation";
 
 
 const Movie = ({ name, released, image, id }) => {
@@ -14,7 +15,7 @@ const Movie = ({ name, released, image, id }) => {
         dispatch(loadDetail(id))
     }
     return (
-        <StyledMovies layoutId={id} onClick={loadDetailHandler}>
+        <StyledMovies variants={popup} initial='hidden' animate='show' layoutId={id} onClick={loadDetailHandler}>
             <Link to={`/movie/${id}`}>
                 <h3>{name}</h3>
                 <p>{released}</p>
