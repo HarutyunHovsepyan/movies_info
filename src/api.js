@@ -1,5 +1,5 @@
 const base_url = 'https://api.themoviedb.org/3/movie/'
-const API_KEY = `?api_key=${process.env.REACT_APP_URL_KEY}`
+const API_KEY = `?api_key=4d6fe7e955be26b8c302283b79f02745`
 const laguagesMovie = `&language=ru-RU&page=1`
 
 export const popularMoviesUrl = () => `${base_url}popular${API_KEY}${laguagesMovie}`
